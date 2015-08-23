@@ -1,4 +1,6 @@
-The pattern recognition used with the GBL fitter is a triplet finder. It works by associating hits together which have a small distance between each other in the global XY plane. Association of hits must take into account the curvature. This is removed when comparison is done assuming some initial distance traveled through the homogenous magnetic field. A series of cuts are performed and for each cut a selection of possible tracks are excluded. The variables you cut on are put in histograms by the pattern recognition processor. Each cut is an absolute value with some taking the X Y distance as different cuts. The cut performed are in the following order:
+Any pattern recognition can be used with the GBL fitter. This is essential to make the procedure as generic as possible since different forms of pattern recognition are needed for different situations. The only requirement of the GBL fitting processor is a collection of hits which form a track. Parameterisation of the track is done internally and is not required by any new pattern recognition. A basic clustering pattern recognition can be used with the GBL fitter. However the new triplet finder method has been shown to perform better in nearly all scenarios. Therefore this is discussed here and is recommended for most analyses. One negative with this form of pattern recogntion is the requirement of more statistics than a simple clustering technique. This is required due to the low fake rate  of the triplet method. In most cases statistics is not an issue at testbeam. Therefore, if consideration is taken before/during the testbeam on the expected number of reconstructed tracks with a DUT hit then this pattern recognition should be used.
+
+The triplet finder works by associating hits together which have a small distance between each other in the global XY plane. Association of hits must take into account the curvature. This is removed when comparison is done assuming some initial distance traveled through the homogenous magnetic field. A series of cuts are performed and for each cut a selection of possible tracks are excluded. The variables you cut on are put in histograms by the pattern recognition processor. Each cut is an absolute value with some taking the X/Y distance as different cuts. The cut performed are in the following order:
 
 \begin{description} 
 \item[DoubletDistCut]  The XY plane distance cut on the outer planes of each arm to create a doublet from two hits. A doublet  is just two hits assumed to come from a track. If the distance between them is below this cut then you create the doublet and this doublet is used in the next cut to look for a triplet. A triplet is just three hits assumed to be a track. Figure \ref{fig:TripForm} shows the doublet on the green planes which will be used to interpolate between to look for a hit on the red plane. 
@@ -57,13 +59,12 @@ The final track produced before the addition of DUT hits must come from a unique
 \label{fig:DoubDis}
 \end{figure}
 
-Unique matching between a single DUT hit and a track must be found. If a track or hit is associated twice then the hit or track is removed from fitting with a DUT hit on that plane. All tracks produced by the mimosas are returned regardless of there being a DUT hit attached.
-
-The hits collected which have been identified are assumed to come from a single track. How this track is described or parameterised depends on how accurate you want to be. Note parameterising is just the same as fitting, however to use the GBL algorithm you need an initial "Guess". So the initial parameterisation can be done with some other fitting process and then passed to the GBL fitter. This can be a simple straight line fit or a broken line fit.
-In all cases the initial parameterisation will be used by the GBL fitting processor if this is required. However in most cases the GBL fit will be good enough with a simple curved fit between the first and last mimosa hit on the track. Therefore all that is required from any pattern recognition is a series of hits which form a track, everything else is dealt with in the GBL fitter.
-
 
 \end{description}
+
+Unique matching between a single DUT hit and a track must be found. If a track or hit is associated twice then the hit/track is removed from fitting with a DUT hit on that plane. All tracks produced by the mimosas are returned regardless of there being a DUT hit attached.
+
+The hits collected which have been identified are assumed to come from a single track. How this track is described or parameterised depends on how accurate you want to be. Note parameterising is just the same as fitting, however to use the GBL algorithm you need an initial "guess". This initial guess must include positions, incidences, kink angles and curvature. The kink angles are fitted as parameters within GBL in contrast to many fitters which includes this as additional non diagonal variance in the propagated error matrix. In all examples this is not required and a single iteration of the GBL fitter with the basic internal parameterisation will suffice.
 
 
 

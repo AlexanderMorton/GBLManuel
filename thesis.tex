@@ -43,7 +43,7 @@
 \usepackage{subfig}
 \usepackage{authblk}
 
-\input{macros}
+%\input{macros}
 
 \usepackage{multirow}
 
@@ -147,9 +147,9 @@
 
 \begin{titlepage}
 \begin{center}
-\includegraphics[width=0.4\linewidth]{ug.eps}\\[1.0cm]
+%\includegraphics[width=0.4\linewidth]{ug.eps}\\[1.0cm]
 
-%\textsc{\LARGE University of Glasgow}\\[0.8cm]
+\textsc{\LARGE University of Glasgow}\\[0.8cm]
 
 
 \HRule\\[0.6cm]
@@ -186,23 +186,9 @@ College of Science and Engineering\\[1.5cm]
 \end{abstract}
 \clearpage
 
+
 \tableofcontents
 \clearpage
-
-%\listoftables
-%\clearpage
-
-%\listoffigures
-%\clearpage
-
-
-%\chapter*{Declaration}
-%\input{parts/declaration.tex}
-%\clearpage
-
-%\chapter*{Author's Contribution}
-%\input{contribution.tex}
-%\clearpage
 
 \pagenumbering{arabic}
 
@@ -217,6 +203,12 @@ College of Science and Engineering\\[1.5cm]
 
 \renewcommand{\chaptermark}[1]{ \markright{\thechapter \hspace{0.2cm} #1}{} }
 \renewcommand{\sectionmark}[1]{ \markright{\thesection \hspace{0.2cm} #1}{} }
+
+\chapter{Introduction}
+\input{parts/introduction.tex}
+\clearpage
+
+
 \chapter{PatternRecognition.}
 \label{chp:patRec}
 \input{parts/patRec.tex}
@@ -224,6 +216,10 @@ College of Science and Engineering\\[1.5cm]
 \chapter{Fitting and Alignment.}
 \label{chp:gbl}
 \input{parts/gbl.tex}
+\clearpage
+\chapter{Examples}
+\label{example}
+\input{parts/examples.tex}
 \clearpage
 
 

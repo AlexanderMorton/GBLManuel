@@ -1,0 +1,12 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Requirements}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Output format}{chapter.1}% 3
+\BOOKMARK [0][-]{chapter.2}{PatternRecognition.}{}% 4
+\BOOKMARK [0][-]{chapter.3}{Fitting and Alignment.}{}% 5
+\BOOKMARK [1][-]{section.3.1}{The five fold way}{chapter.3}% 6
+\BOOKMARK [2][-]{subsection.3.1.1}{Linking trajectory points}{section.3.1}% 7
+\BOOKMARK [2][-]{subsection.3.1.2}{Add measurement information to points}{section.3.1}% 8
+\BOOKMARK [2][-]{subsection.3.1.3}{Add scattering information}{section.3.1}% 9
+\BOOKMARK [2][-]{subsection.3.1.4}{Add global parameters}{section.3.1}% 10
+\BOOKMARK [2][-]{subsection.3.1.5}{Add local parameters}{section.3.1}% 11
+\BOOKMARK [0][-]{chapter.4}{Examples}{}% 12
