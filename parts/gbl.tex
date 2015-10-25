@@ -1,7 +1,7 @@
 The information needed to use the GBL algorithm is the same of any track fitting method. Therefore the information provided here can be used with any fitting procedure. The only difference is the underlying "engine" which is used, in this case GBL. The construction of a track which can be used for alignment or analysis is done in five steps. The order does not pattern except the linking of trajectory points must be done before anything else. Each step will be covered in turn. 
 \section{The five fold way}
 \subsection{Linking trajectory points}
-The initial requirement for track fitting is a coordinate system which links the local and global frames. The local frame is defined by the readout layout of the sensor, a cartesian grid over the surface of the sensor and is unique for each DUT. The global frame is a cartesian grid which extends over the full detector system. This is the same for all DUTs and alignment is needed to link both these frame for each DUT. Each plane is linked to the same global frame using the transformation:
+The initial requirement for track fitting is a coordinate system which links the local and global frames. The local frame is defined by the readout layout of the sensor, a Cartesian grid over the surface of the sensor and is unique for each DUT. The global frame is a Cartesian grid which extends over the full detector system. This is the same for all DUTs and alignment is needed to link both these frame for each DUT. Each plane is linked to the same global frame using the transformation:
 \begin{equation}
  \overrightarrow{G} =   \hat{R}\overrightarrow{L} +  \overrightarrow{O}
 \end{equation}
@@ -17,7 +17,7 @@ with $R_{X/Y/Z}$ as rotations in that particular axis. $R_I$ is the initial rota
 The order of applying transformations matters and must be considered. This is important for alignment and is discussed in section \ref{gloPar}. All large rotations round the X/Y axis must be applied as transforms to the initial matrix. If you apply this transform to $R_Y$/$R_X$ then the alignment matrix will not correspond to the correct frame for the rotation corrections. This can be ignored for rotations about 30 degrees. However if mapping between the local and global frame swaps axis then this is too large to adjust for and should be applied to the matrix $R_I$. The small changes to the rotations from alignment is applied to $\hat{R_Z}$,  $\hat{R_Y}$ and $\hat{R_X}$.
 
 
-The full trajectory of a track does not need to be modelled for an accurate fit. Locations of high scattering and with measurements must be added. These points must be linked together using some Jacobain. A Jacobain in this case is just a link between how changes in position/incidence on one plane affects another. Curvature is an additional fitting term which is common to the track and does not vary with position. The Jacobain used to link the points together is 
+The full trajectory of a track does not need to be modeled for an accurate fit. Locations of high scattering and with measurements must be added. These points must be linked together using some Jacobian. A Jacobian in this case is just a link between how changes in position/incidence on one plane affects another. Curvature is an additional fitting term which is common to the track and does not vary with position. The Jacobian used to link the points together is 
 
 
 \begin{center}
@@ -32,18 +32,18 @@ $
 \end{array}
  \right)
 $
-\captionof{table}{The Jacobian used to link discrete points to form a continuous track. dz is the normalised direction of the track along z. ds is the arc length to the next point. F() is a vector which is the curvature of the track which depends on the energy and magnetic field the particle is immersed in.}
+\captionof{table}{The Jacobian used to link discrete points to form a continuous track. dz is the normalized direction of the track along z. ds is the arc length to the next point. F() is a vector which is the curvature of the track which depends on the energy and magnetic field the particle is immersed in.}
 \end{center}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\linewidth]{figures/meas-scat-jac-link.png}
-\caption{The red points have measurement and scattering information. The yellow points only scattering information. Measurements are the hit positions in the local frame. Scattering information is the kink angles measured in the local frame. Both have associated errors which must be determined. The Jacobain links all these point together so a change in one will affect a change in another.}
+\caption{The red points have measurement and scattering information. The yellow points only scattering information. Measurements are the hit positions in the local frame. Scattering information is the kink angles measured in the local frame. Both have associated errors which must be determined. The Jacobian links all these point together so a change in one will affect a change in another.}
 \label{fig:LinkJac}
 \end{figure}
 
 
-What points and where depend on the location of the measurement planes and the scattering from all the material. In the EUTelescope case a single point is used for each measurement and the material infront of this until the next measurement is associated with two points. Two points are need to describe a thick scatterer which is discussed in section \ref{sec:scat}. The linking of the full trajectory is done in the global frame.
+What points and where depend on the location of the measurement planes and the scattering from all the material. In the EUTelescope case a single point is used for each measurement and the material in front of this until the next measurement is associated with two points. Two points are need to describe a thick scatterer which is discussed in section \ref{sec:scat}. The linking of the full trajectory is done in the global frame.
 
 \subsection{Add measurement information to points}
 
@@ -74,7 +74,7 @@ The propagation matrix used is
  
 GBL expects a link which goes from global to local and this defines the parameters used above. You can define the slopes in the local frame and axis in global frame and then invert the corresponding matrix. Either or will work.
 
-The errors associated in the local frame need not be diagonal and will be transformed internally to a frame in which they are. However they must be correct for each measurement. This is simple in most cases were each measurement is independent of position in the local frame. This is true for most strip and pixel sensors but not all. A simple example being a strip sensor with radial strips. This would require that each position has a different error matrix associated with it. Since each strip is oriented differently to the local cartersian grid which defines the local frame. This situation highlights the difference between the local frame and measurement frame which is often discussed in literature. The measurement frame in one in which the errors are diagonal. Therefore for this example each strips orientation would require a different measurement frame. This requirement has been considered and can be easily added to the measurement function which adds this information.
+The errors associated in the local frame need not be diagonal and will be transformed internally to a frame in which they are. However they must be correct for each measurement. This is simple in most cases were each measurement is independent of position in the local frame. This is true for most strip and pixel sensors but not all. A simple example being a strip sensor with radial strips. This would require that each position has a different error matrix associated with it. Since each strip is oriented differently to the local Cartesian grid which defines the local frame. This situation highlights the difference between the local frame and measurement frame which is often discussed in literature. The measurement frame in one in which the errors are diagonal. Therefore for this example each strips orientation would require a different measurement frame. This requirement has been considered and can be easily added to the measurement function which adds this information.
 
 
 
@@ -121,10 +121,10 @@ The propagation of scattering errors to different frames is all well and good. H
 
 First the total radiation length must be determined for the track's trajectory. TGeo volumes are used to describe the full detector system including the radiation length. The track is assumed to propagate through each volume at the appropriate incidence to determine the correct radiation length at each point. Two things must be determined to model scattering.
 
-First the variance at each point must be determined. To determine this the total variance of the trajectory must be calculated. The total variance is calculated using the radiation length and beam energy. This is were the Highland formula comes in. The Highland formula relates the radiation length percentage and beam energy to a scattering RMS. One important characteristic of the HIghland formula is its non linear properties: The radiation length calculated must be for the full system and then split between each point used to model the scattering. 
+First the variance at each point must be determined. To determine this the total variance of the trajectory must be calculated. The total variance is calculated using the radiation length and beam energy. This is were the Highland formula comes in. The Highland formula relates the radiation length percentage and beam energy to a scattering RMS. One important characteristic of the Highland formula is its non linear properties: The radiation length calculated must be for the full system and then split between each point used to model the scattering. 
 
-Second the position of the scatterers must be determined. This depends on the radiation length and size of the volume to model. If the volume is thin then it can be assumed a thin scatterer. A thin scatter will have no displacement through the material but some angular displacement. So all the radiation length is located at that point. The red measurement dots on figure \ref{fig:LinkJac} are modelled this way. The variance at this point is the total variance weighted by the fraction of radiation length at this point relative to the total radiation length.
-A thick scatterer will have some displacement due to scattering within the material and can be viewed as the combination of many thin scatterers. If you propagate the error associated with each thin scatterer which makes up the thick scatter then it can be shown that a thick scatterer can be modelled by two thin scatterers. The location and allowed variance of the kinks is determined using the relations
+Second the position of the scatterers must be determined. This depends on the radiation length and size of the volume to model. If the volume is thin then it can be assumed a thin scatterer. A thin scatter will have no displacement through the material but some angular displacement. So all the radiation length is located at that point. The red measurement dots on figure \ref{fig:LinkJac} are modeled this way. The variance at this point is the total variance weighted by the fraction of radiation length at this point relative to the total radiation length.
+A thick scatterer will have some displacement due to scattering within the material and can be viewed as the combination of many thin scatterers. If you propagate the error associated with each thin scatterer which makes up the thick scatter then it can be shown that a thick scatterer can be modeled by two thin scatterers. The location and allowed variance of the kinks is determined using the relations
 
 \begin{multicols}{2}
 \begin{equation}
@@ -170,7 +170,7 @@ Integration can be used to work out the parameter values for any inhomogeneous v
  norm =   \frac{T_i}{X0_i} 
 \end{equation}
 
-were T is the thickness and the summation is over all homogenous volumes.  This allows the correct modelling of the radiation length for the full particles trajectory. 
+were T is the thickness and the summation is over all homogeneous volumes.  This allows the correct modeling of the radiation length for the full particles trajectory. 
 
 If a more detailed radiation length calculation is needed then the tracks actual trajectory through the full TGeo volumes space can be used. However in all examples this is not required. Care must be taken that the TGeo volumes described contain the sensor hits. Since a transformation between local and global can move the hits outside these volumes. The current simple radiation length calculations do not suffer from the this problem since they always travel through each blocks' centre.
 
@@ -189,7 +189,7 @@ The addition of global parameters is used to determine alignment corrections. Ho
 \label{fig:MisAlign}
 \end{figure}
 
-Figure \ref{fig:MisAlign} illustrates a clear problem with the description of the sensor in space. The corrections needed are assumed to be the transformation between global and local frames which minimises the residual weighted with errors for all tracks and planes.
+Figure \ref{fig:MisAlign} illustrates a clear problem with the description of the sensor in space. The corrections needed are assumed to be the transformation between global and local frames which minimizes the residual weighted with errors for all tracks and planes.
 
 A link between the local frame residual and alignment parameters which define the transformations must be determined. The alignment parameters are defined $(X,Y,Z, \alpha,\beta,\gamma)$ which are the offsets in the global frame and the rotations defined in each frame of the rotations applied before it. This last point is important: The corrections to the rotations must be determined in the frame reached before that rotation is applied. So the $R_X$ (Rotation round X axis) matrix correction must be determined after you have rotated round the Z axis. This can be dealt with in two ways: 
 
@@ -262,7 +262,7 @@ Kink angles can be estimated using the plane ID=271 in the gear file at any dete
 %
 %\subsection{Quad}
 %
-%The Quad module (250x50) is placed in the centre of the setup with a reference DUT. Both are aligned and have comparable resolutions. The Quad module residual is shown in figure \ref{fig:quad}. The resolution in Y is larger than expected. This has been a common theme with all FEI4 devices and has been demostrated with DAFFitter. 
+%The Quad module (250x50) is placed in the centre of the setup with a reference DUT. Both are aligned and have comparable resolutions. The Quad module residual is shown in figure \ref{fig:quad}. The resolution in Y is larger than expected. This has been a common theme with all FEI4 devices and has been demonstrated with DAFFitter. 
 %
 %\begin{figure}[H]
 %\hspace{-35mm}
